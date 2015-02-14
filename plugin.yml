@@ -1,0 +1,19 @@
+name: DutyAndKick
+main: me.jomens235.DutyAndKickMain
+version: 1.0
+commands:
+    duty:
+        description: Puts a guard on duty.
+        usage: /duty
+    caps:
+        description: Kicks a player for excessive caps.
+        usage: /caps [Player]
+        permission: dutyandkick.caps
+    lang:
+        description: Kicks a player for foul language.
+        usage: /lang [Player]
+        permission: dutyandkick.lang
+    spam:
+        description: Kicks a player for spamming.
+        usage: /spam [Player]
+        permission: dutyandkick.spam
