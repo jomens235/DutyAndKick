@@ -1,7 +1,5 @@
 package me.jomens235;
 
-import java.util.HashMap;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -14,21 +12,14 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class EventListener implements Listener {
-
-	private HashMap<Player, ItemStack[]> inv = new HashMap<Player, ItemStack[]>();
-	private HashMap<Player, ItemStack[]> armor = new HashMap<Player, ItemStack[]>();
 
 	@EventHandler
 	public void onDeath(PlayerDeathEvent event) {
 		Player player = event.getEntity();
-		if (DutyAndKickMain.getInstance().isOnDuty(player)
-				&& player.hasPermission("dutyandkick.clear")) {
-			DutyAndKickMain.getInstance().setOnDuty(player, false);
-			inv.put(player, player.getInventory().getContents());
-			armor.put(player, player.getInventory().getArmorContents());
+		if ((DutyAndKickMain.getInstance().isOnDuty(player))
+				&& (player.hasPermission("dutyandkick.clear"))) {
 			event.getDrops().clear();
 			Bukkit.broadcastMessage(ChatColor.RED + "Duty"
 					+ ChatColor.DARK_GRAY + ChatColor.BOLD + "> "
@@ -41,14 +32,7 @@ public class EventListener implements Listener {
 	public void onRespawn(PlayerRespawnEvent event) {
 		Player player = event.getPlayer();
 		if (DutyAndKickMain.getInstance().isOnDuty(player)) {
-			player.getInventory().setContents(inv.get(player));
-			player.getInventory().setArmorContents(armor.get(player));
-			inv.remove(player);
-			armor.remove(player);
-		} else {
-			if (!DutyAndKickMain.getInstance().isOnDuty(player)) {
-				
-			}
+			DutyAndKickMain.getInstance().setOnDuty(player, false);
 		}
 	}
 
